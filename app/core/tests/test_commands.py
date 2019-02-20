@@ -1,6 +1,4 @@
 from unittest.mock import patch
-<<<<<<< HEAD
-=======
 
 from django.core.management import call_command
 from django.db.utils import OperationalError
