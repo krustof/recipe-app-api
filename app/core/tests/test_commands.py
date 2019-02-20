@@ -22,5 +22,3 @@ class CommandTestx(TestCase):
             gi.side_effect = [OperationalError] * 5 + [True]
             call_command('wait_for_db')
             self.asserEqual(gi.call_count, 6)
-        
->>>>>>> 182a357c770986d7a77c0c6b20f90cd0662934f3
