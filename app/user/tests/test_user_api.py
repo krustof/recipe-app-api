@@ -22,7 +22,7 @@ class PublicUserApiTests(TestCase):
     def test_create_valid_user_success(self):
         """Test creating user with valid payload"""
         payload = {
-            'email':'test@test.com',
+            'email': 'test@test.com',
             'password': 'testpass',
             'name': 'Test Name'
         }
