@@ -7,7 +7,7 @@ from rest_framework.test import APIClient
 
 from core.models import Tag
 
-from recipe.serializers import TagSeralizer
+from recipe.serializers import TagSerializer
 
 
 TAGS_URL = reverse('recipe:tag-list')
@@ -23,7 +23,7 @@ class PublicTagsAPITests(TestCase):
         """Test that login is required for retrieving tags"""
         res = self.client.get(TAGS_URL)
 
-        self.assertEqual(res.status_code, status.HTTP_201_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class PrivateTagsAPITests(TestCase):
