@@ -29,13 +29,13 @@ class PublicTagsAPITests(TestCase):
 class PrivateTagsAPITests(TestCase):
     """Test the authorized user tags API"""
 
-    def seUp(self):
+    def setUp(self):
         self.user = get_user_model().objects.create_user(
             'test@test.com',
             'password123'
         )
         self.client = APIClient()
-        self.client.force_authentivate(self.user)
+        self.client.force_authenticate(self.user)
 
     def test_retrieve_tags(self):
         """Test retrieving tags"""
@@ -58,6 +58,8 @@ class PrivateTagsAPITests(TestCase):
         Tag.objects.create(user=user2, name='Fruity')
         tag = Tag.objects.create(user=self.user, name='Comfort Food')
 
+        res = self.client.get(TAGS_URL)
+        
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['name'], tag.name)
