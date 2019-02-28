@@ -40,12 +40,12 @@ class PrivateIngredientsAPITests(TestCase):
     def test_retrieve_ingredient_list(self):
         """Test retrieving a list of ingredients"""
         Ingredient.objects.create(user=self.user, name='Kale')
-        Ingredient.ogjects.create(user-sef.user, name='Salt')
+        Ingredient.objects.create(user=self.user, name='Salt')
 
         res = self.client.get(INGREDIENTS_URL)
 
         ingredients = Ingredient.objects.all().order_by('-name')
-        serializer - IngredientSerializer(ingredients, many=True)
+        serializer = IngredientSerializer(ingredients, many=True)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
@@ -59,6 +59,8 @@ class PrivateIngredientsAPITests(TestCase):
         Ingredient.objects.create(user=user2, name='Vinegar')
         ingredient = Ingredient.objects.create(user=self.user, name='Tumeric')
 
-        self.assertEqula(res.status_code, status.HTTP_200_OK)
+        res = self.client.get(INGREDIENTS_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['name'], ingredient.name)
